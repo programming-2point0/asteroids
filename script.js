@@ -48,7 +48,16 @@ function fireShot() {
 }
 
 function moveShots(delta) {
-  console.warn("NOT IMPLEMENTED!");
+  for (const shot of shots) {
+    shot.y -= shot.s * delta;
+    if (shot.y < 0) {
+      removeShot(shot);
+    }
+  }
+}
+
+function removeShot(shot) {
+  console.warn("NOT IMPLEMENTED");
 }
 
 const asteroids = [];
