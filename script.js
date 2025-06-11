@@ -17,6 +17,7 @@ function keypressHandler(event) {
   if (key === "w" || key === "ArrowUp") controls.up = value;
   if (key === "s" || key === "ArrowDown") controls.down = value;
   if (key === "d" || key === "ArrowRight") controls.right = value;
+  if (key === " ") fireShot();
 }
 
 const controls = {
@@ -28,6 +29,14 @@ const controls = {
 };
 
 let points = 0;
+
+function fireShot() {
+  console.warn("NOT IMPLEMENTED!");
+}
+
+function moveShots(delta) {
+  console.warn("NOT IMPLEMENTED!");
+}
 
 const asteroids = [];
 
@@ -94,6 +103,7 @@ function tick(timestamp) {
 
   moveSpaceship(delta);
   moveAsteroids(delta);
+  moveShots(delta);
 
   for (const asteroid of asteroids) {
     if (isColliding(asteroid, spaceship)) {
