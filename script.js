@@ -29,9 +29,22 @@ const controls = {
 };
 
 let points = 0;
+const shots = [];
 
 function fireShot() {
-  console.warn("NOT IMPLEMENTED!");
+    const div = document.createElement("div");
+    div.classList.add("shot");
+
+    document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
+    const shot = {
+      x: spaceship.x,
+      y: spaceship.y,
+      w: 50,
+      h: 50,
+      s: Math.random() * 100 + 50,
+      visual: div,
+    };
+    shots.push(shot);
 }
 
 function moveShots(delta) {
