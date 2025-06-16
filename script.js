@@ -32,19 +32,28 @@ let points = 0;
 const shots = [];
 
 function fireShot() {
-    const div = document.createElement("div");
-    div.classList.add("shot");
+    const div = addShotToScreen();
+    addShotToList(div);
+}
 
-    document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
-    const shot = {
-      x: spaceship.x,
-      y: spaceship.y,
-      w: 50,
-      h: 50,
-      s: Math.random() * 100 + 50,
-      visual: div,
-    };
-    shots.push(shot);
+function addShotToList(div) {
+  const shot = {
+    x: spaceship.x,
+    y: spaceship.y,
+    w: 50,
+    h: 50,
+    s: Math.random() * 100 + 50,
+    visual: div,
+  };
+  shots.push(shot);
+}
+
+function addShotToScreen() {
+  const div = document.createElement("div");
+  div.classList.add("shot");
+
+  document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
+  return div;
 }
 
 function moveShots(delta) {
