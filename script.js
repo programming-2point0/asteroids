@@ -66,6 +66,15 @@ function moveShots(delta) {
 }
 
 function removeShot(shot) {
+  removeShotFromScreen(shot);
+  removeShotFromList(shot);
+}
+
+function removeShotFromScreen(shot) {
+  console.warn("NOT IMPLEMENTED");
+}
+
+function removeShotFromList(shot) {
   console.warn("NOT IMPLEMENTED");
 }
 
