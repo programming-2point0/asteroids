@@ -120,19 +120,56 @@ let lastTime = 0;
 function tick(timestamp) {
   requestAnimationFrame(tick);
 
-  const delta = (timestamp - lastTime) / 1000;
-  lastTime = timestamp;
+  const delta = calculateDelta(timestamp);
 
   moveSpaceship(delta);
   moveAsteroids(delta);
   moveShots(delta);
 
+  checkCollisions();
+
+  displaySpaceship();
+
+  displayAsteroids();
+
+  displayScore();
+  displayHealth();
+}
+
+
+function displayHealth() {
+  document.querySelector("#healthbar").style.width = `${spaceship.hl}%`;
+}
+
+function displayScore() {
+  document.querySelector("#score #number").textContent = String(points).padStart(3, "0");
+}
+
+function displayAsteroids() {
+  for (const asteroid of asteroids) {
+    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
+  }
+}
+
+function displaySpaceship() {
+  const visualSpaceShip = document.querySelector(".spaceship");
+  visualSpaceShip.style.translate = `${spaceship.x - spaceship.w / 2}px ${spaceship.y - spaceship.h / 2}px`;
+}
+
+function checkCollisions() {
   for (const asteroid of asteroids) {
     if (isColliding(asteroid, spaceship)) {
       slowDown(asteroid);
       loseHealth(spaceship);
     }
   }
+}
+
+function calculateDelta(timestamp) {
+  const delta = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  return delta;
+}
 
   function slowDown(asteroid) {
     asteroid.s *= 0.95;
@@ -153,14 +190,3 @@ function tick(timestamp) {
   function combinedSize(objA, objB) {
     return objA.w / 2 + objB.w / 2;
   }
-
-  const visualSpaceShip = document.querySelector(".spaceship");
-  visualSpaceShip.style.translate = `${spaceship.x - spaceship.w / 2}px ${spaceship.y - spaceship.h / 2}px`;
-
-  for (const asteroid of asteroids) {
-    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
-  }
-
-  document.querySelector("#score #number").textContent = String(points).padStart(3, "0");
-  document.querySelector("#healthbar").style.width = `${spaceship.hl}%`;
-}
