@@ -90,6 +90,12 @@ function moveAsteroids(delta) {
   }
 }
 
+function displayAsteroids() {
+  for (const asteroid of asteroids) {
+    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
+  }
+}
+
 
 const spaceship = {
   x: 380,
@@ -113,6 +119,11 @@ function moveSpaceship(delta) {
     spaceship.y += spaceship.s * delta;
   }
 
+}
+
+function displaySpaceship() {
+  const visualSpaceShip = document.querySelector(".spaceship");
+  visualSpaceShip.style.translate = `${spaceship.x - spaceship.w / 2}px ${spaceship.y - spaceship.h / 2}px`;
 }
 
 let lastTime = 0;
@@ -145,17 +156,6 @@ function displayScore() {
   document.querySelector("#score #number").textContent = String(points).padStart(3, "0");
 }
 
-function displayAsteroids() {
-  for (const asteroid of asteroids) {
-    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
-  }
-}
-
-function displaySpaceship() {
-  const visualSpaceShip = document.querySelector(".spaceship");
-  visualSpaceShip.style.translate = `${spaceship.x - spaceship.w / 2}px ${spaceship.y - spaceship.h / 2}px`;
-}
-
 function checkCollisions() {
   for (const asteroid of asteroids) {
     if (isColliding(asteroid, spaceship)) {
@@ -171,22 +171,22 @@ function calculateDelta(timestamp) {
   return delta;
 }
 
-  function slowDown(asteroid) {
-    asteroid.s *= 0.95;
-  }
+function slowDown(asteroid) {
+  asteroid.s *= 0.95;
+}
 
-  function loseHealth(spaceship) {
-    spaceship.hl--;
-  }
+function loseHealth(spaceship) {
+  spaceship.hl--;
+}
 
-  function isColliding(asteroid, spaceship) {
-    return distance(asteroid, spaceship) < combinedSize(asteroid, spaceship)
-  }
+function isColliding(asteroid, spaceship) {
+  return distance(asteroid, spaceship) < combinedSize(asteroid, spaceship)
+}
 
-  function distance(objA, objB) {
-    return Math.sqrt(Math.pow(objA.x - objB.x, 2) + Math.pow(objA.y - objB.y, 2));
-  }
+function distance(objA, objB) {
+  return Math.sqrt(Math.pow(objA.x - objB.x, 2) + Math.pow(objA.y - objB.y, 2));
+}
 
-  function combinedSize(objA, objB) {
-    return objA.w / 2 + objB.w / 2;
-  }
+function combinedSize(objA, objB) {
+  return objA.w / 2 + objB.w / 2;
+}
