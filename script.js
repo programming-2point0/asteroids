@@ -71,11 +71,12 @@ function removeShot(shot) {
 }
 
 function removeShotFromScreen(shot) {
-  console.warn("NOT IMPLEMENTED");
+  shot.visual.remove();
 }
 
 function removeShotFromList(shot) {
-  console.warn("NOT IMPLEMENTED");
+  const index = shots.indexOf(shot);
+  shots.splice(index,1);
 }
 
 function displayShots() {
