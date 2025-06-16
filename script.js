@@ -121,6 +121,20 @@ function displayAsteroids() {
   }
 }
 
+function removeAsteroid(asteroid) {
+  removeAsteroidFromScreen(asteroid);
+  removeAsteroidFromList(asteroid);
+}
+
+function removeAsteroidFromScreen(asteroid) {
+  asteroid.visual.remove();
+}
+
+function removeAsteroidFromList(asteroid) {
+  const index = asteroids.indexOf(asteroid);
+  asteroids.splice(index,1);
+}
+
 
 const spaceship = {
   x: 380,
@@ -187,6 +201,12 @@ function checkCollisions() {
     if (isColliding(asteroid, spaceship)) {
       slowDown(asteroid);
       loseHealth(spaceship);
+    }
+    for(const shot of shots) {
+      if(isColliding(asteroid, shot)) {
+        removeShot(shot);
+        removeAsteroid(asteroid);
+      }
     }
   }
 }
