@@ -60,6 +60,12 @@ function removeShot(shot) {
   console.warn("NOT IMPLEMENTED");
 }
 
+function displayShots() {
+  for (const shot of shots) {
+    shot.visual.style.translate = `${shot.x - 25}px ${shot.y - 25}px`;
+  }
+}
+
 const asteroids = [];
 
 function createAsteroids() {
@@ -142,6 +148,7 @@ function tick(timestamp) {
   displaySpaceship();
 
   displayAsteroids();
+  displayShots();
 
   displayScore();
   displayHealth();
