@@ -89,36 +89,49 @@ const asteroids = [];
 
 function createAsteroids() {
   for (let i = 0; i < 10; i++) {
-    const div = document.createElement("div");
-    div.classList.add("asteroid");
-
-    document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
-    const obj = {
-      x: Math.floor(Math.random() * 750),
-      y: -30,
-      w: 50,
-      h: 50,
-      s: Math.random() * 100 + 50,
-      visual: div,
-    };
-    asteroids.push(obj);
+    createAsteroid();
   }
+}
+
+function createAsteroid() {
+  const div = addAsteroidToScreen();
+  addAsteroidToList(div);
+}
+
+function addAsteroidToList(div) {
+  const asteroid = {
+    y: 0,
+    x: 0,
+    w: 50,
+    h: 50,
+    s: Math.random() * 100 + 50,
+    visual: div,
+  };
+  restartAsteroid(asteroid);
+
+  asteroids.push(asteroid);
+}
+
+function addAsteroidToScreen() {
+  const div = document.createElement("div");
+  div.classList.add("asteroid");
+
+  document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
+  return div;
 }
 
 function moveAsteroids(delta) {
   for (const asteroid of asteroids) {
     asteroid.y += asteroid.s * delta;
     if (asteroid.y > 450) {
-      asteroid.y = -30;
-      asteroid.x = Math.floor(Math.random() * 750);
+      restartAsteroid(asteroid);
     }
   }
 }
 
-function displayAsteroids() {
-  for (const asteroid of asteroids) {
-    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
-  }
+function restartAsteroid(asteroid) {
+  asteroid.y = -30;
+  asteroid.x = Math.floor(Math.random() * 750);
 }
 
 function removeAsteroid(asteroid) {
@@ -135,6 +148,11 @@ function removeAsteroidFromList(asteroid) {
   asteroids.splice(index,1);
 }
 
+function displayAsteroids() {
+  for (const asteroid of asteroids) {
+    asteroid.visual.style.translate = `${asteroid.x - 25}px ${asteroid.y - 25}px`;
+  }
+}
 
 const spaceship = {
   x: 380,
