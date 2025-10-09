@@ -42,7 +42,7 @@ function addShotToList(div) {
     y: spaceship.y,
     w: 50,
     h: 50,
-    s: Math.random() * 100 + 50,
+    s: 250,
     visual: div,
   };
   shots.push(shot);
