@@ -52,7 +52,7 @@ function addShotToScreen() {
   const div = document.createElement("div");
   div.classList.add("shot");
 
-  document.querySelector("#gamefield").insertAdjacentElement("beforeend", div);
+  document.querySelector("#gamefield").insertAdjacentElement("afterbegin", div);
   return div;
 }
 
