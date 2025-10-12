@@ -40,7 +40,7 @@ function addShotToList(div) {
   const shot = {
     x: spaceship.x,
     y: spaceship.y,
-    w: 50,
+    w: 12,
     h: 50,
     s: 250,
     visual: div,
