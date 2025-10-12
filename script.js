@@ -81,7 +81,7 @@ function removeShotFromList(shot) {
 
 function displayShots() {
   for (const shot of shots) {
-    shot.visual.style.translate = `${shot.x - 25}px ${shot.y - 25}px`;
+    shot.visual.style.translate = `${shot.x - 12}px ${shot.y - 25}px`;
   }
 }
 
